@@ -6,21 +6,23 @@ on:
     - main
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: write
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: setup dotnet
+      - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
-      - name: build
+      - name: Build
         run: dotnet build -c Release
-      - name: authenticate to package registry
+      - name: Create package
+        run: dotnet pack -c Release
+      - name: Authenticate to package registry
         run: dotnet nuget add source --username github --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/paulus-allods/index.json"
-      - name: push package to registry
+      - name: Push package to registry
         run: dotnet nuget push bin/Release/ComponentAce.ZlibNet.*.nupkg --source "github"
