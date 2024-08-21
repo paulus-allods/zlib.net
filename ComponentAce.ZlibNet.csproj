@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Authors>paulus-allods</Authors>
+    <RepositoryUrl>https://github.com/paulus-allods/zlib.net</RepositoryUrl>
+    <Description>Version of zlib.net ported to .net 8.0.</Description>
   </PropertyGroup>
 
 </Project>
